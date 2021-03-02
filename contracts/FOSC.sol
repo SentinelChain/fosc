@@ -21,6 +21,7 @@ contract FOSC is ERC677Receiver {
         uint256 callValue;
         Status status;
         bytes result;
+        uint256 entrypointId;
     }
 
     mapping(uint256 => CallStruct) public calls;
@@ -78,6 +79,25 @@ contract FOSC is ERC677Receiver {
         token = _token;
     }
 
+    struct InputStruct
+    {
+        uint256 entrypointId;
+        bytes data;
+    }
+
+    function convertByteToStruct(bytes inputData) private
+    returns (InputStruct output)
+    {
+        for (uint i=0; i<4; i++)
+        {
+            uint256 temp = uint256(inputData[i]);
+            temp <<= 8 * i;
+            output.entrypointId ^= temp;
+        }
+
+        output.data = inputData;
+    }    
+
     function onTokenTransfer(
         address _from,
         uint256 _value,
@@ -86,8 +106,13 @@ contract FOSC is ERC677Receiver {
         require(msg.sender == address(token), "Sender must be SENI token");
         require(_value == callValue, "Wrong amount of SENI");
 
+        InputStruct memory inputStruct = convertByteToStruct(_data);
+
+        require(inputStruct.data.length > uint256, "Length of InputStruct.data cannot exist 256 bytes");
+
         callId++;
-        calls[callId].data = _data;
+        calls[callId].data = inputStruct.data;
+        calls[callId].entrypointId = inputStruct.entrypointId;
         calls[callId].caller = _from;
         calls[callId].callValue = _value;
         calls[callId].status = Status.NEW;
