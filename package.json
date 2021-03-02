@@ -1,0 +1,30 @@
+{
+  "name": "fosc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "scripts": {
+    "test": "sh scripts/test.sh",
+    "flatten": "sh scripts/flatten.sh",
+    "migrate": "node_modules/.bin/truffle migrations --network ganache",
+    "compile": "node_modules/.bin/truffle compile",
+    "lint": "solhint \"contracts/**/*.sol\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@openzeppelin/contracts": "^3.1.0",
+    "chai": "^4.2.0",
+    "solc": "^0.6.12",
+    "solidity-bytes-utils": "0.0.9",
+    "truffle": "^5.1.44"
+  },
+  "devDependencies": {
+    "@openzeppelin/test-environment": "^0.1.5",
+    "@openzeppelin/test-helpers": "^0.5.6",
+    "ganache-cli": "^6.10.1",
+    "husky": "^4.3.0",
+    "truffle-flattener": "^1.4.4"
+  }
+}
