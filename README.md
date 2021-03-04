@@ -47,7 +47,7 @@ In smart contract design, a request for data sent to a smart contract is made up
 
 In a cross-chain oracle scenario, the oracle design has to be decoupled into 2 components. One part of the oracle is responsible for receiving the transaction request from one chain. The other part of the oracle is responsible for managing response on the other chain.
 
-![fosc-overview](D:/GitHub/fosc/doc/img/fosc-overview.png)
+![fosc-overview](./doc/img/fosc-overview.png)
 
 
 ## Terminologies
