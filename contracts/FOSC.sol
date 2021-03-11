@@ -85,12 +85,12 @@ contract FOSC is ERC677Receiver {
         bytes data;
     }
 
-    function convertByteToStruct(bytes inputData) private
-    returns (InputStruct output)
+    function convertByteToStruct(bytes memory inputData) private
+    returns (InputStruct memory output)
     {
         for (uint i=0; i<4; i++)
         {
-            uint256 temp = uint256(inputData[i]);
+            uint256 temp = uint256(uint8(inputData[i]));
             temp <<= 8 * i;
             output.entrypointId ^= temp;
         }
@@ -108,7 +108,7 @@ contract FOSC is ERC677Receiver {
 
         InputStruct memory inputStruct = convertByteToStruct(_data);
 
-        require(inputStruct.data.length > uint256, "Length of InputStruct.data cannot exist 256 bytes");
+        require(inputStruct.data.length > 2147483647, "Length of InputStruct.data cannot exist 256 bytes");
 
         callId++;
         calls[callId].data = inputStruct.data;
