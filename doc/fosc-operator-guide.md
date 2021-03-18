@@ -10,7 +10,7 @@ An FOSC Oracle is a service provider of the oracle service to be consumed by the
 ## Clone
 
 ```
-    $ git clone https://github.com/SentinelChain/farmtrek-fosc-smartcontract 
+    $ git clone https://github.com/SentinelChain/fosc
     $ npm install
     $ mkdir flats
     $ npm run flatten
